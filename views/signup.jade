@@ -1,0 +1,11 @@
+extends layout
+
+block content
+  h1 SIGN UP
+  form(action="/signup/jwt", method="post")
+    div username
+    input#username(type="text", name="username")
+    div password
+    input#password(type="password", name="password")
+    div 
+    input(type="submit", value="Sign up")
