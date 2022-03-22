@@ -10,7 +10,7 @@ router.post('/jwt', (req, res, next) => {
     }
     const token = jwt.sign(payload, secret)
     res.cookie('token', token)
-    res.render('welcome', {token})
+    res.render('welcome', { token })
 })
 
 router.get('/', (req, res, next) => {

@@ -5,7 +5,7 @@ const jwt = require('jsonwebtoken')
 
 router.get('/', (req, res, next) => {
     const token = req.cookies.token
-    jwt.verify(token,'ahihi', (err, decode) => {
+    jwt.verify(token, 'ahihi', (err, decode) => {
         return res.json({ name: decode.username })
     })
 })
