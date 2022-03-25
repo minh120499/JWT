@@ -3,9 +3,10 @@ const router = express.Router()
 const jwt = require('jsonwebtoken')
 
 
-router.get('/', (req, res, next) => {
+router.post('/', (req, res, next) => {
     const token = req.cookies.token
     jwt.verify(token, 'ahihi', (err, decode) => {
+        if(err) throw err
         return res.json({ name: decode.username })
     })
 })

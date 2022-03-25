@@ -1,20 +1,24 @@
 const express = require('express')
 const router = express.Router()
 const jwt = require('jsonwebtoken')
+const User = require('../../models/User')
 
-router.post('/jwt', (req, res, next) => {
-    const secret = 'ahihi'
-    const payload = {
-        "username": req.body.username,
-        "password": req.body.password
-    }
-    const token = jwt.sign(payload, secret)
-    res.cookie('token', token)
-    res.render('welcome', { token })
+
+router.post('/', (req, res, next) => {
+    User.create({
+        username: req.body.username,
+        password: req.body.password,
+        bio: req.body.bio
+    })
+        .then(user => {
+            const token = user.getToken()
+            res.cookie('token', token)
+            return res.json({ token })
+        })
+        .catch(e => {
+            return res.json({ e })
+        })
 })
 
-router.use('/', (req, res, next) => {
-    res.render('signup')
-})
 
 module.exports = router
